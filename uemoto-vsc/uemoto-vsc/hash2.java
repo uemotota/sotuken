@@ -13,15 +13,23 @@ public class hash2{
     public static void main(String[] args) {
         
         String inpw ="";
-        String setpw ="0504";
+        String setpw ="";
         String sha1 ="";
         String setsha = "";
 
-        System.out.println(" パスワードを入力　");
-        Scanner sc = new Scanner(System.in);
-        inpw = sc.nextLine();
 
-        
+        System.out.println(" パスワードの設定をします　");
+        System.out.println(" 設定するパスワードを入力してください　");
+        Scanner sc1 = new Scanner(System.in);
+        setpw = sc1.nextLine();
+
+
+
+        System.out.println(" パスワードを入力してください　");
+        Scanner sc2 = new Scanner(System.in);
+        inpw = sc2.nextLine();
+
+        ///入力されたパスワードのハッシュ化
         try{
             MessageDigest digest = MessageDigest.getInstance("SHA-1");
             byte[] result = digest.digest(inpw.getBytes());
@@ -30,7 +38,8 @@ public class hash2{
             e.printStackTrace();
             
         }
-
+        
+        ///設定されたパスワードのハッシュ化
         try{
             MessageDigest digest = MessageDigest.getInstance("SHA-1");
             byte[] result = digest.digest(setpw.getBytes());
@@ -42,16 +51,19 @@ public class hash2{
 
 
         
-        if (setsha == sha1){
-            System.out.println("OK");
+        if (setsha.equals(sha1)){
+            System.out.println("");
+            System.out.println("[[[OK]]]");
         }else{
+            System.out.println("");
             System.out.println("パスワードが間違っています");
         }
-
-        System.out.println( "ハッシュ化した暗号(入力)" );
+        System.out.println("");
+        System.out.println( "↓↓↓ハッシュ化した暗号(入力値)↓↓↓" );
         System.out.println( sha1 );
 
-        System.out.println( "ハッシュ化した暗号(設定)" );
+        System.out.println("");
+        System.out.println( "↓↓↓ハッシュ化した暗号(設定値)↓↓↓" );
         System.out.println( setsha );
      }  
 }
