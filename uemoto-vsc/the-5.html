@@ -3,34 +3,76 @@
 
 <head>
     <meta charset="utf-8">
-    <titele>登録ページ</titele>
+    <titele></titele>
     <script src="hash-4.js"></script>
 </head>
 
 <body>
-    <div>
+    <div id="subscription">
+        <table >
+            <titele>登録</titele>
+        </table>
             <table>
                     <tr>
                         <tb>ID</tb>
         
                         <tb>
-                            <input type="text" id="ID" value="">
+                            <input type="text" id="ID1" value="">
                         </tb>
                     </tr>
                     <tr>
                         <tb>パスワード</tb>
                         <tb>
-                            <input type="text" id="passw" value="">
+                            <input type="text" id="passw1" value="">
                         </tb>
                     </tr>
-                </table>
-                <table>
+
                 <tr>
-                    <button type="button" onclick="SHA_256_HASH_1()">登録</button>
+                    <button type="button" id="commit">登録</button>
         
                 </tr>
+            </table>
+            <table>
+                <input type="hidden" id="hashtext1" size="120">
+            </table>
 
 
+    </div>
+    <div id="login">
+            <table >
+                    <titele>ログイン</titele>
+            </table>
+        <table>
+            <tr>
+                <tb>ID</tb>
+
+                <tb>
+                    <input type="text" id="ID2" value="">
+                </tb>
+            </tr>
+            <tr>
+                <tb>パスワード</tb>
+                <tb>
+                    <input type="text" id="passw2" value="">
+                </tb>
+            </tr>
+            <tr>
+                <button type="button" id="signin">ログイン</button>
+    
+            </tr>
+        </table>
+        <table>
+                <input type="hidden" id="hashtext2" size="120">
+        </table>
+
+    </div>
+    <div　id="last">
+        <table>
+                <titele>ログインできました</titele>
+        </table>
+        <table>
+                ハッシュ化したパスワード（SHA-256): <input type="text" id="hashtext" size="120">
+        </table>
     </div>
 </body>
 

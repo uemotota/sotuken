@@ -1,47 +1,24 @@
-function SHA_256_HASH_1() {
-    window.location.href ='./the-4.html';
+class sha {
+    constructor() {
+        this.passwd = {};
+    };
 
-    var nam1 = document.getElementById("ID1").value;
-    
+    async SHA_256_HASH_1( id, pass ) {
+        let buffer = new TextEncoder("utf-8").encode(pass);
+        let hash = await crypto.subtle.digest("SHA-256", buffer);
+        this.passwd[id] = hex(hash);
+        console.log(this.passwd);
+        return hash;
+    }
 
-    var str1 = document.getElementById("passw").value;
-    var buffer = new TextEncoder("utf-8").encode(str1);
-    return [crypto.subtle.digest("SHA-256", buffer).then(
-        function (hash) {
-            
-            document.getElementById("hashtext1").value = hex(hash)
-            console.log(hashtext1);
-        }
-    ),nam1,hashtext1];
-   
-}
+    async SHA_256_HASH_2( id, pass ) {
+        var buffer = new TextEncoder("utf-8").encode(pass);
+        let hash = await crypto.subtle.digest("SHA-256", buffer);
+        console.log( [this.passwd[id], hex(hash) ]);
+        return ( this.passwd[id] == hex(hash) );
+    }
 
-
-function SHA_256_HASH_2() {
-   
-
-    var str2 = document.getElementById("passw").value;
-    var buffer = new TextEncoder("utf-8").encode(str2);
-    
-    return crypto.subtle.digest("SHA-256", buffer).then(
-        function (hash) {
-            var nam1=SHA_256_HASH_1(nam1);
-            var hasht1=SHA_256_HASH_1(hashtext1);
-            var nam2 = document.getElementById("ID2").value;
-            if(nam1==nam2){
-                var hasht2=document.getElementById("hashtext2").value = hex(hash)
-                if(hasht1==hasht2){
-                    document.getElementById("hashtext2").value;
-                    window.location.href ='./the-6.html'
-                }else{
-
-                }
-            }else{
-
-            }
-        }
-    );
-}
+};
 
 
 
@@ -63,3 +40,31 @@ function hex(buffer) {
     return hexCodes.join("");
 }
 
+window.addEventListener( 'load', () => {
+    //var login = document.querySelector("#login");
+    //login.style.display = "none";
+    var sha1 = new sha();
+
+    document.querySelector("#commit").addEventListener('click', async () => {
+        //document.querySelector('#subscription').style.display = "none";
+        //let login = document.querySelector('#login');
+        //login.style.display = "block";
+        let id = document.getElementById("ID1").value;
+        let pass = document.getElementById("passw1").value;
+        let hashtext = await sha1.SHA_256_HASH_1( id, pass );
+
+        document.getElementById("hashtext1").value = hex(hashtext);
+        console.log(hashtext1);
+    });
+
+    document.querySelector('#signin').addEventListener('click', async () => {
+        let id = document.getElementById("ID2").value;
+        let pass = document.getElementById("passw2").value;
+        let hantei = await sha1.SHA_256_HASH_2( id, pass );
+        if(  hantei ) {
+            console.log("ろぐいんできました");
+        } else {
+            console.log("ぱすわーどがちがいます");
+        }
+    });
+})
