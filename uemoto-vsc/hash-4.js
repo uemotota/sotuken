@@ -8,7 +8,7 @@ class sha {
         let hash = await crypto.subtle.digest("SHA-256", buffer);
         this.passwd[id] = hex(hash);
         console.log(this.passwd);
-        return hash;
+        return this.passwd[id];
     }
 
     async SHA_256_HASH_2( id, pass ) {
@@ -53,8 +53,27 @@ window.addEventListener( 'load', () => {
         let pass = document.getElementById("passw1").value;
         let hashtext = await sha1.SHA_256_HASH_1( id, pass );
 
-        document.getElementById("hashtext1").value = hex(hashtext);
-        console.log(hashtext1);
+        //document.getElementById("hashtext1").value = hex(hashtext);
+        //console.log(hashtext1);
+
+        let a = document.querySelector('#list');
+        document.createElement('tr');
+        let tr1 = document.createElement('tr');
+        let td1 = document.createElement('td');
+        let td2 = document.createElement('td')
+        let naiyou1 = document.createTextNode(id);
+        td1.appendChild(naiyou1);
+        let naiyou2 = document.createTextNode(hashtext);
+        td2.appendChild(naiyou2);
+        tr1.appendChild(td1);
+        tr1.appendChild(td2);
+        a.appendChild(tr1);
+    
+
+
+
+
+
     });
 
     document.querySelector('#signin').addEventListener('click', async () => {
@@ -67,4 +86,7 @@ window.addEventListener( 'load', () => {
             console.log("ぱすわーどがちがいます");
         }
     });
+
+
+
 })
